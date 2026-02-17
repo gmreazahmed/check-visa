@@ -1,0 +1,265 @@
+/* =====================================
+   GLOBAL (Original Exact)
+===================================== */
+
+body {
+  font: 12px/1.3 Arial, Helvetica, sans-serif;
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+  background: #e5e5e5;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+.top-header {
+  background: url("/images/head-backgr.png") no-repeat center bottom;
+  background-size: cover;
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+
+/* Navbar background remove */
+.navbar {
+  background: transparent;
+  margin-top: 20px;
+}
+
+.navbar-inner {
+  width: 960px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.header-wrapper {
+  overflow: hidden;
+  background: url("/images/head-backgr.png") no-repeat 50% 100%;
+  height: 166px;
+  display: block;
+  margin: 0 0 18px;
+}
+
+.header-container {
+  padding: 20px 10px 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.emblem {
+  height: 70px;
+  margin-right: 12px;
+}
+
+.header-text {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.3;
+  max-width: 520px;
+}
+
+.visa-logo {
+  height: 75px;
+}
+
+.flags img {
+  height: 16px;
+  margin-left: 5px;
+}
+
+/* =====================================
+   NAVBAR
+===================================== */
+
+.navbar {
+  
+  margin: 0 0 18px;
+}
+
+.navbar a {
+  color: #fff;
+  padding: 12px 18px;
+  text-decoration: none;
+  font-size: 12px;
+  display: inline-block;
+  border-top: 4px solid transparent;
+}
+
+.navbar a:nth-child(1){ border-top:4px solid #f3c623;}
+.navbar a:nth-child(2){ border-top:4px solid #7b2cbf;}
+.navbar a:nth-child(3){ border-top:4px solid #80ed99;}
+.navbar a:nth-child(4){ border-top:4px solid #4cc9f0;}
+.navbar a:nth-child(5){ border-top:4px solid #e63946;}
+.navbar a:nth-child(6){ border-top:4px solid #ffb703;}
+
+.navbar a:hover {
+  background: #2f5fa0;
+}
+
+/* =====================================
+   BODY WRAPPER
+===================================== */
+
+#body-wrapper {
+  height: 100%;
+  overflow: hidden;
+  padding: 0 10px;
+  margin: 0 0 18px;
+  display: flex;
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
+
+#sidebar {
+  width: 220px;
+}
+
+.sidebar-item {
+  border: 1px solid #999;
+  background: #f3f3f3;
+  padding: 12px;
+  font-size: 12px;
+}
+
+.sidebar-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.sidebar-link {
+  display: block;
+  margin-top: 8px;
+  background: #3c6db3;
+  color: #fff;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+/* =====================================
+   CONTENT
+===================================== */
+
+#content {
+  flex: 1;
+  margin-left: 25px;
+}
+
+/* =====================================
+   PANEL
+===================================== */
+
+fieldset.app-panel {
+  border: 1px solid #888;
+  background: #b9cfcf;
+  padding: 0;
+}
+
+.app-left-panel {
+  padding: 10px 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #999;
+  font-size: 14px;
+}
+
+.app-content-panel {
+  padding: 15px;
+}
+
+/* =====================================
+   FORM
+===================================== */
+
+.app-content-data {
+  margin-bottom: 12px;
+}
+
+.app-content-data label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.app-content-data input {
+  width: 260px;
+  padding: 4px;
+  border: 1px solid #999;
+  background: #eee;
+  font-size: 12px;
+}
+
+.blue-btn {
+  background: #3c6db3;
+  color: #fff;
+  padding: 5px 20px;
+  border: 1px solid #222;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.blue-btn:hover {
+  background: #2f5fa0;
+}
+
+/* =====================================
+   CAPTCHA
+===================================== */
+
+.captcha-image {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  background: #d6e5e5;
+  padding: 8px;
+  width: 180px;
+  border: 1px solid #888;
+  color: #2f5fa0;
+}
+
+/* =====================================
+   RESULT
+===================================== */
+
+.result-wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.result-photo {
+  width: 110px;
+  height: 110px;
+  border: 1px solid #333;
+  object-fit: cover;
+}
+
+.result-top p,
+.result-bottom p {
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+.status {
+  color: red;
+  font-weight: bold;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.footer {
+  border-top: 1px solid #999;
+  padding: 10px 0;
+  font-size: 11px;
+  color: #9a9a9a;
+}
