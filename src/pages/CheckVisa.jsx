@@ -174,45 +174,45 @@ export default function CheckVisa() {
               <div className="app-content-panel">
                 <div className="result-wrapper">
 
-                  <div className="result-photo-box">
-                    <img
-                      src={result.photo_url}
-                      alt="Photo"
-                      className="result-photo"
-                    />
-                  </div>
+                    {/* Top Section */}
+                    <div className="result-top-section">
 
-                  <div className="result-details">
+                        <div className="result-photo-box">
+                        <img
+                            src={result.photo_url}
+                            alt="Photo"
+                            className="result-photo"
+                        />
+                        </div>
 
-                    <div className="result-top">
-                      <p><strong>Surname:</strong> {result.surname}</p>
-                      <p><strong>First name:</strong> {result.first_name}</p>
-                      <p><strong>Date of birth:</strong> {result.date_of_birth}</p>
-                      <p><strong>Citizenship:</strong> {result.citizenship}</p>
-                      <p><strong>Passport number:</strong> {result.passport_num}</p>
+                        <div className="result-top">
+                        <p><strong>Surname:</strong> {result.surname}</p>
+                        <p><strong>First name:</strong> {result.first_name}</p>
+                        <p><strong>Date of birth:</strong> {result.date_of_birth}</p>
+                        <p><strong>Citizenship:</strong> {result.citizenship}</p>
+                        <p><strong>Passport number:</strong> {result.passport_num}</p>
+                        </div>
+
                     </div>
 
+                    {/* Bottom Section */}
                     <div className="result-bottom">
-                      <p className="status">
+                        <p className="status">
                         Visa status: {result.visa_status}
-                      </p>
-                      <p>Visa validity: {result.visa_validity}</p>
-                      <p>Visa type: {result.visa_type}</p>
-                      <p>Visit purpose: {result.visit_purpose}</p>
+                        </p>
+                        <p>Visa validity: {result.visa_validity}</p>
+                        <p>Visa type: {result.visa_type}</p>
+                        <p>Visit purpose: {result.visit_purpose}</p>
 
-                      <div className="result-btn-box">
-                        <button
-                          className="blue-btn"
-                          onClick={resetSearch}
-                        >
-                          Another search
+                        <div className="result-btn-box">
+                        <button className="blue-btn" onClick={resetSearch}>
+                            Another search
                         </button>
-                      </div>
+                        </div>
                     </div>
 
-                  </div>
+                    </div>
 
-                </div>
               </div>
 
             </fieldset>
