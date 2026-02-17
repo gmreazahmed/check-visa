@@ -1,25 +1,240 @@
-/* admin */
+/* ===============================
+   ADMIN CONTAINER
+================================ */
+
+.container {
+  width: 960px;
+  margin: 40px auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===============================
+   FORM
+================================ */
+
 .admin-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 15px;
+  background: #f8f9fb;
+  padding: 20px;
+  border-radius: 6px;
   margin-bottom: 30px;
 }
 
-.admin-form input {
-  padding: 6px;
-  border: 1px solid #888;
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
+
+.form-group label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.submit-btn {
+  grid-column: span 2;
+  padding: 10px;
+  background: #3c6db3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Submit button full width */
+
+.admin-form button {
+  grid-column: span 2;
+  padding: 10px;
+  background: #3c6db3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.admin-form button:hover {
+  background: #2f5fa0;
+}
+
+/* ===============================
+   TABLE
+================================ */
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.admin-table thead {
+  background: #3c6db3;
+  color: #fff;
 }
 
 .admin-table th,
 .admin-table td {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   padding: 8px;
+  font-size: 13px;
+  text-align: left;
+}
+
+.admin-table th {
+  font-weight: bold;
+}
+
+.admin-table tbody tr:nth-child(even) {
+  background: #f4f6fa;
+}
+
+.admin-table img {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
+
+.admin-table button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 5px;
+  transition: 0.2s;
+}
+
+.admin-table button:first-child {
+  background: #ffc107;
+  color: #000;
+}
+
+.admin-table button:first-child:hover {
+  background: #e0a800;
+}
+
+.admin-table button:last-child {
+  background: #dc3545;
+  color: #fff;
+}
+
+.admin-table button:last-child:hover {
+  background: #b52a37;
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+
+h2 {
+  margin-bottom: 15px;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+/* ===============================
+   ADMIN LOGIN
+================================ */
+
+.admin-login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.admin-login-card {
+  background: #fff;
+  padding: 40px 35px;
+  border-radius: 8px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.admin-login-card h2 {
+  margin-bottom: 10px;
+}
+
+.admin-login-card p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.admin-login-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   font-size: 14px;
+}
+
+.admin-login-card input:focus {
+  outline: none;
+  border-color: #3c6db3;
+  box-shadow: 0 0 4px rgba(60,109,179,0.4);
+}
+
+.admin-login-card button {
+  width: 100%;
+  padding: 10px;
+  background: #3c6db3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-login-card button:hover {
+  background: #2f5fa0;
+}
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #b52a37;
+}
+
+.login-error {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
 }

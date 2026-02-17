@@ -1,8 +1,37 @@
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "../supabaseClient";
 
 export default function AdminPanel() {
+
+  /* ================= PASSWORD PROTECTION ================= */
+
+  const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+
+  const [authorized, setAuthorized] = useState(
+    localStorage.getItem("adminAuth") === "true"
+  );
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (password === ADMIN_PASSWORD) {
+      setAuthorized(true);
+      localStorage.setItem("adminAuth", "true");
+      setErrorMsg("");
+    } else {
+      setErrorMsg("Wrong Password ❌");
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminAuth");
+    setAuthorized(false);
+    setPassword("");
+  };
+
+  /* ================= FORM STATE ================= */
 
   const emptyForm = {
     visa_number: "",
@@ -22,60 +51,53 @@ export default function AdminPanel() {
   const [visaList, setVisaList] = useState([]);
   const [editId, setEditId] = useState(null);
 
-  useEffect(() => {
-    fetchVisaList();
-  }, []);
+  /* ================= FETCH ================= */
 
-  const fetchVisaList = async () => {
-    const { data, error } = await supabase
+  const fetchVisaList = useCallback(async () => {
+    const { data } = await supabase
       .from("visa_records")
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (!error) setVisaList(data || []);
-  };
+    setVisaList(data || []);
+  }, []);
+
+  useEffect(() => {
+    if (authorized) fetchVisaList();
+  }, [authorized, fetchVisaList]);
+
+  /* ================= HANDLERS ================= */
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleEdit = (item) => {
     setForm(item);
     setEditId(item.id);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this record?")) return;
-
-    const { error } = await supabase
-      .from("visa_records")
-      .delete()
-      .eq("id", id);
-
-    if (!error) {
-      fetchVisaList();
-      alert("Deleted ✅");
-    }
+    await supabase.from("visa_records").delete().eq("id", id);
+    fetchVisaList();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let photoUrl = null;
+    let photoUrl = form.photo_url || null;
 
-    // If new photo selected → upload
     if (photo) {
-      const fileName = Date.now() + "-" + photo.name;
+      const fileName = `${Date.now()}-${photo.name}`;
 
-      const { error: uploadError } = await supabase.storage
+      const { error } = await supabase.storage
         .from("visa-photos")
         .upload(fileName, photo, { upsert: true });
 
-      if (uploadError) {
-        alert("Photo upload failed ❌");
-        return;
-      }
+      if (error) return alert("Photo upload failed ❌");
 
       const { data } = supabase.storage
         .from("visa-photos")
@@ -84,40 +106,14 @@ export default function AdminPanel() {
       photoUrl = data.publicUrl;
     }
 
+    const payload = { ...form, photo_url: photoUrl };
+
     if (editId) {
-      // UPDATE
-      const { error } = await supabase
-        .from("visa_records")
-        .update({
-          ...form,
-          ...(photoUrl && { photo_url: photoUrl })
-        })
-        .eq("id", editId);
-
-      if (!error) {
-        alert("Updated Successfully ✅");
-        setEditId(null);
-      }
-
+      await supabase.from("visa_records").update(payload).eq("id", editId);
+      setEditId(null);
     } else {
-      // INSERT
-      if (!photoUrl) {
-        alert("Please upload photo");
-        return;
-      }
-
-      const { error } = await supabase
-        .from("visa_records")
-        .insert([
-          {
-            ...form,
-            photo_url: photoUrl
-          }
-        ]);
-
-      if (!error) {
-        alert("Added Successfully ✅");
-      }
+      if (!photoUrl) return alert("Please upload photo");
+      await supabase.from("visa_records").insert([payload]);
     }
 
     setForm(emptyForm);
@@ -125,68 +121,108 @@ export default function AdminPanel() {
     fetchVisaList();
   };
 
-  return (
-    <>
-  
+  const renderInput = (label, name, type = "text") => (
+    <div className="form-group">
+      <label>{label}</label>
+      <input
+        type={type}
+        name={name}
+        value={form[name]}
+        onChange={handleChange}
+      />
+    </div>
+  );
 
-      <div className="container">
-        <h2>Admin Panel</h2>
+  /* ================= LOGIN SCREEN ================= */
 
-        <form onSubmit={handleSubmit} className="admin-form">
+  if (!authorized) {
+    return (
+      <div className="admin-login-wrapper">
+        <form className="admin-login-card" onSubmit={handleLogin}>
+          <h2>Admin Access</h2>
+          <p>Please enter your password to continue</p>
 
-          <input name="visa_number" placeholder="Visa Number" value={form.visa_number} onChange={handleChange} />
-          <input name="surname" placeholder="Surname" value={form.surname} onChange={handleChange} />
-          <input name="first_name" placeholder="First Name" value={form.first_name} onChange={handleChange} />
-          <input type="date" name="date_of_birth" value={form.date_of_birth} onChange={handleChange} />
-          <input name="citizenship" placeholder="Citizenship" value={form.citizenship} onChange={handleChange} />
-          <input name="passport_num" placeholder="Passport Number" value={form.passport_num} onChange={handleChange} />
-          <input name="visa_status" placeholder="Visa Status" value={form.visa_status} onChange={handleChange} />
-          <input type="date" name="visa_validity" value={form.visa_validity} onChange={handleChange} />
-          <input name="visa_type" placeholder="Visa Type" value={form.visa_type} onChange={handleChange} />
-          <input name="visit_purpose" placeholder="Visit Purpose" value={form.visit_purpose} onChange={handleChange} />
+          <input
+            type="password"
+            placeholder="Enter Admin Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-          <input type="file" onChange={(e) => setPhoto(e.target.files[0])} />
+          {errorMsg && <div className="login-error">{errorMsg}</div>}
 
-          <button type="submit" className="check-btn">
-            {editId ? "Update Visa" : "Add Visa"}
-          </button>
+          <button type="submit">Login</button>
         </form>
+      </div>
+    );
+  }
 
-        <hr />
+  /* ================= ADMIN PANEL ================= */
 
-        <h3>All Visa Records</h3>
+  return (
+    <div className="container">
 
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Photo</th>
-              <th>Visa No</th>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Passport</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {visaList.map((item) => (
-              <tr key={item.id}>
-                <td><img src={item.photo_url} width="60" /></td>
-                <td>{item.visa_number}</td>
-                <td>{item.first_name} {item.surname}</td>
-                <td>{item.visa_status}</td>
-                <td>{item.passport_num}</td>
-                <td>
-                  <button onClick={() => handleEdit(item)}>Edit</button>
-                  <button onClick={() => handleDelete(item.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
+      <div className="admin-header">
+        <h2>Admin Panel</h2>
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
 
-     
-    </>
+      <form onSubmit={handleSubmit} className="admin-form">
+
+        {renderInput("Visa Number", "visa_number")}
+        {renderInput("Surname", "surname")}
+        {renderInput("First Name", "first_name")}
+        {renderInput("Date of Birth", "date_of_birth", "date")}
+        {renderInput("Citizenship", "citizenship")}
+        {renderInput("Passport Number", "passport_num")}
+        {renderInput("Visa Status", "visa_status")}
+        {renderInput("Visa Validity", "visa_validity", "date")}
+        {renderInput("Visa Type", "visa_type")}
+        {renderInput("Visit Purpose", "visit_purpose")}
+
+        <div className="form-group full-width">
+          <label>Photo</label>
+          <input type="file" onChange={(e) => setPhoto(e.target.files[0])} />
+        </div>
+
+        <button type="submit" className="submit-btn">
+          {editId ? "Update Visa" : "Add Visa"}
+        </button>
+
+      </form>
+
+      <h3>All Visa Records</h3>
+
+      <table className="admin-table">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Visa No</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Passport</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {visaList.map((item) => (
+            <tr key={item.id}>
+              <td><img src={item.photo_url} width="60" alt="" /></td>
+              <td>{item.visa_number}</td>
+              <td>{item.first_name} {item.surname}</td>
+              <td>{item.visa_status}</td>
+              <td>{item.passport_num}</td>
+              <td>
+                <button onClick={() => handleEdit(item)}>Edit</button>
+                <button onClick={() => handleDelete(item.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+    </div>
   );
 }
