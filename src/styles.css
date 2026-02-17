@@ -264,7 +264,17 @@ fieldset.app-panel {
 
 .footer {
   border-top: 1px solid #999;
-  padding: 10px 0;
-  font-size: 11px;
+  padding: 12px 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
   color: #9a9a9a;
+}
+
+.footer-container a {
+  color: blue;
+  text-decoration: underline;
 }
