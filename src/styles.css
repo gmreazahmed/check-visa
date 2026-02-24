@@ -140,22 +140,22 @@ button {
 /* COLOR BARS (FIXED CORRECT SELECTOR) */
 
 #horizontal-menu li.menu-item-level1.col1 {
-  background:url("/Images/deepred-bar.gif") repeat-x;
-}
-#horizontal-menu li.menu-item-level1.col2 {
   background:url("/Images/golden-bar.gif") repeat-x;
 }
-#horizontal-menu li.menu-item-level1.col3 {
+#horizontal-menu li.menu-item-level1.col2 {
   background:url("/Images/violet-bar.gif") repeat-x;
 }
-#horizontal-menu li.menu-item-level1.col4 {
+#horizontal-menu li.menu-item-level1.col3 {
   background:url("/Images/greenlime-bar.gif") repeat-x;
 }
-#horizontal-menu li.menu-item-level1.col5 {
+#horizontal-menu li.menu-item-level1.col4 {
   background:url("/Images/bluecyan-bar.gif") repeat-x;
 }
-#horizontal-menu li.menu-item-level1.col6 {
+#horizontal-menu li.menu-item-level1.col5 {
   background:url("/Images/deepred-bar.gif") repeat-x;
+}
+#horizontal-menu li.menu-item-level1.col6 {
+  background:url("/Images/golden-bar.gif") repeat-x;
 }
 
 /* =====================================
