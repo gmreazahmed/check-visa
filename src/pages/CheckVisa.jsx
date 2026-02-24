@@ -3,6 +3,10 @@ import { supabase } from "../supabaseClient";
 
 export default function CheckVisa() {
 
+  /* =====================================================
+     STATE
+  ===================================================== */
+
   const [visaNumber, setVisaNumber] = useState("");
   const [captcha, setCaptcha] = useState("");
   const [userCaptcha, setUserCaptcha] = useState("");
@@ -11,15 +15,16 @@ export default function CheckVisa() {
 
   const canvasRef = useRef(null);
 
-  /* ================= CAPTCHA DRAW ================= */
+  /* =====================================================
+     CAPTCHA LOGIC
+  ===================================================== */
 
   const drawCaptcha = useCallback((text) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
-    const width = canvas.width;
-    const height = canvas.height;
+    const { width, height } = canvas;
 
     ctx.clearRect(0, 0, width, height);
 
@@ -27,16 +32,15 @@ export default function CheckVisa() {
     ctx.fillStyle = "#d6e5e5";
     ctx.fillRect(0, 0, width, height);
 
-    // Heavy Noise
-    for (let i = 0; i < 1500; i++) {
+    // Noise
+    for (let i = 0; i < 1200; i++) {
       ctx.fillStyle = `rgba(0,0,150,${Math.random() * 0.3})`;
       ctx.fillRect(Math.random() * width, Math.random() * height, 1, 1);
     }
 
-    // Random Lines
+    // Random lines
     for (let i = 0; i < 3; i++) {
       ctx.strokeStyle = "rgba(0,0,120,0.5)";
-      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(Math.random() * width, Math.random() * height);
       ctx.lineTo(Math.random() * width, Math.random() * height);
@@ -49,21 +53,19 @@ export default function CheckVisa() {
     ctx.shadowColor = "rgba(0,0,100,0.4)";
     ctx.shadowBlur = 2;
 
-    for (let i = 0; i < text.length; i++) {
-      const x = 20 + i * 30;
+    text.split("").forEach((char, index) => {
+      const x = 20 + index * 30;
       const y = 35;
       const angle = (Math.random() - 0.5) * 0.6;
 
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(angle);
-      ctx.fillText(text[i], 0, 0);
+      ctx.fillText(char, 0, 0);
       ctx.restore();
-    }
+    });
 
   }, []);
-
-  /* ================= CAPTCHA GENERATE ================= */
 
   const generateCaptcha = useCallback(() => {
     const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -83,7 +85,9 @@ export default function CheckVisa() {
     generateCaptcha();
   }, [generateCaptcha]);
 
-  /* ================= SUBMIT ================= */
+  /* =====================================================
+     FORM SUBMIT
+  ===================================================== */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -116,23 +120,27 @@ export default function CheckVisa() {
 
       setResult(data);
 
-    } catch (err) {
+    } catch {
       alert("Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
-  const btnAltaCautareClick = () => {
+  const resetSearch = () => {
     setResult(null);
     setVisaNumber("");
     generateCaptcha();
   };
 
-  /* ================= JSX ================= */
+  /* =====================================================
+     RENDER
+  ===================================================== */
 
   return (
     <>
+      {/* ================= HEADER ================= */}
+
       <div id="header-wrapper">
         <div id="header-emblem">
           <a id="header-title" href="#">
@@ -164,7 +172,10 @@ export default function CheckVisa() {
         </ul>
       </div>
 
+      {/* ================= BODY ================= */}
+
       <div id="body-wrapper" className="inner">
+
         <div id="sidebar">
           <div className="sidebar-item">
             Things you should know
@@ -176,7 +187,7 @@ export default function CheckVisa() {
           <div className="page-title-content"></div>
           <div id="masterMainContent">
 
-            {!result && (
+            {!result ? (
               <form id="formVerificaViza" onSubmit={handleSubmit}>
                 <fieldset className="app-panel">
 
@@ -208,10 +219,13 @@ export default function CheckVisa() {
 
                         <br />
 
-                        <a href="#" onClick={(e) => {
-                          e.preventDefault();
-                          generateCaptcha();
-                        }}>
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            generateCaptcha();
+                          }}
+                        >
                           Refresh
                         </a>
 
@@ -239,11 +253,11 @@ export default function CheckVisa() {
                     <div className="content-right"></div>
 
                   </div>
+
                 </fieldset>
               </form>
-            )}
+            ) : (
 
-            {result && (
               <div id="rezVerificaViza">
                 <fieldset className="app-panel">
 
@@ -253,7 +267,7 @@ export default function CheckVisa() {
 
                   <div className="app-content-panel">
 
-                    <div style={{ display: "flex", gap: "10px", margin: "10px", marginRight: "50px" }}>
+                    <div style={{ display: "flex", gap: 10, margin: 10, marginRight: 50 }}>
 
                       <div>
                         {result.photo_url ? (
@@ -261,22 +275,22 @@ export default function CheckVisa() {
                             src={result.photo_url}
                             alt=""
                             style={{
-                              width: "120px",
-                              height: "120px",
+                              width: 120,
+                              height: 120,
                               border: "1px solid #333",
                               objectFit: "cover"
                             }}
                           />
                         ) : (
                           <div style={{
-                            width: "120px",
-                            height: "120px",
+                            width: 120,
+                            height: 120,
                             border: "1px solid #333",
                             background: "#f5f5f5",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            fontSize: "14px",
+                            fontSize: 14,
                             color: "#666"
                           }}>
                             Photo not found
@@ -284,7 +298,7 @@ export default function CheckVisa() {
                         )}
                       </div>
 
-                      <div style={{ fontSize: "14px", lineHeight: "1.8" }}>
+                      <div style={{ fontSize: 14, lineHeight: 1.8 }}>
                         <div>Surname: <strong>{result.surname}</strong></div>
                         <div>First name: <strong>{result.first_name}</strong></div>
                         <div>Date of birth: <strong>{result.date_of_birth}</strong></div>
@@ -294,7 +308,7 @@ export default function CheckVisa() {
 
                     </div>
 
-                    <div style={{ fontSize: "14px", lineHeight: "1.8", margin: "10px" }}>
+                    <div style={{ fontSize: 14, lineHeight: 1.8, margin: 10 }}>
                       <div>
                         <span style={{ color: "red" }}>Visa status: </span>
                         <strong style={{ color: "red" }}>{result.visa_status}</strong>
@@ -304,8 +318,8 @@ export default function CheckVisa() {
                       <div>Visit purpose: <strong>{result.visit_purpose}</strong></div>
                     </div>
 
-                    <div style={{ textAlign: "center", margin: "0 10px 10px 10px" }}>
-                      <button type="button" onClick={btnAltaCautareClick}>
+                    <div style={{ textAlign: "center", margin: "0 10px 10px" }}>
+                      <button type="button" onClick={resetSearch}>
                         Another search
                       </button>
                     </div>
@@ -313,24 +327,35 @@ export default function CheckVisa() {
                   </div>
                 </fieldset>
               </div>
+
             )}
 
           </div>
         </div>
       </div>
 
-      <div id="footer-wrapper"> 
-        <span style={{ color: "LightGray" }}>Version: 1.6.1.0</span> 
-        <table id="contact-info"> 
-          <tbody> 
-            <tr> 
-              <td style={{ width: "210px" }}>&nbsp;</td> 
-              <td><strong>E-mail:</strong></td> 
-              <td> <a href="mailto:evisa@mfa.gov.md"> evisa@mfa.gov.md </a> </td> 
-            </tr> 
-          </tbody> 
-        </table> 
+      {/* ================= FOOTER ================= */}
+
+      <div id="footer-wrapper">
+        <span style={{ color: "LightGray" }}>
+          Version: 1.6.1.0
+        </span>
+
+        <table id="contact-info">
+          <tbody>
+            <tr>
+              <td style={{ width: "210px" }}>&nbsp;</td>
+              <td><strong>E-mail:</strong></td>
+              <td>
+                <a href="mailto:evisa@mfa.gov.md">
+                  evisa@mfa.gov.md
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
     </>
   );
 }
