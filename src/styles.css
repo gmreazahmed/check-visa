@@ -1,280 +1,272 @@
 /* =====================================
-   GLOBAL (Original Exact)
+   RESET
 ===================================== */
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ul, li,
+fieldset, form, label, input, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
 body {
-  font: 12px/1.3 Arial, Helvetica, sans-serif;
-  position: relative;
-  width: 960px;
-  margin: 0 auto;
-  background: #e5e5e5;
+  font:12px/1.3 Arial, Helvetica, sans-serif;
+  width:960px;
+  margin:0 auto;
+  line-height:1;
+}
+
+ol, ul { list-style:none; }
+table { border-collapse:collapse; border-spacing:0; }
+
+/* =====================================
+   BUTTON
+===================================== */
+
+button {
+  width:200px;
+  background:#3c79c1;
+  color:#fff;
+  text-align:center;
+  padding:3px;
+  border-radius:5px;
+  cursor:pointer;
 }
 
 /* =====================================
    HEADER
 ===================================== */
-.top-header {
-  background: url("/images/head-backgr.png") no-repeat center bottom;
-  background-size: cover;
-  padding-top: 20px;
-  padding-bottom: 0;
+
+#header-wrapper {
+  overflow:hidden;
+  background:url("/Images/head-backgr.png") no-repeat 50% 100%;
+  height:166px;
+  margin-bottom:18px;
 }
 
-/* Navbar background remove */
-.navbar {
-  background: transparent;
-  margin-top: 20px;
+#header-emblem {
+  width:640px;
+  height:131px;
+  float:left;
 }
 
-.navbar-inner {
-  width: 960px;
-  margin: 0 auto;
-  display: flex;
+#header-title {
+  position:relative;
+  display:block;
+  background:url("/Images/national-emblem.gif") no-repeat 30px 28px;
+  padding:42px 0 0 89px;
+  height:53px;
+  width:545px;
+  font-size:14px;
+  cursor:pointer;
 }
 
-.header-wrapper {
-  overflow: hidden;
-  background: url("/images/head-backgr.png") no-repeat 50% 100%;
-  height: 166px;
-  display: block;
-  margin: 0 0 18px;
+#header-title span {
+  position:absolute;
+  top:32px;
+  left:89px;
+  width:440px;
+  color:#fff;
 }
 
-.header-container {
-  padding: 20px 10px 0 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+#header-right {
+    overflow: hidden;
+    width: 300px;
+    padding: 14px 0 0 0;
+    border-bottom: 1px solid #fff;
+    font-family: Verdana;
+    font-size: larger;
+    font-weight: bolder;
+    text-align: left;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-}
-
-.emblem {
-  height: 70px;
-  margin-right: 12px;
-}
-
-.header-text {
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1.3;
-  max-width: 520px;
-}
-
-.visa-logo {
-  height: 75px;
-}
-
-.flags img {
-  height: 16px;
-  margin-left: 5px;
+#header-right span {
+  float:right;
+  padding-right:50px;
 }
 
 /* =====================================
-   NAVBAR
+   MENU
 ===================================== */
 
-.navbar {
-  
-  margin: 0 0 18px;
+#horizontal-menu {
+  clear:both;
+  padding-left:6px;
+  background:url("/Images/1x1-nav-bg.gif") repeat-x 0 6px;
+  width:960px;
 }
 
-.navbar a {
-  color: #fff;
-  padding: 12px 18px;
-  text-decoration: none;
-  font-size: 12px;
-  display: inline-block;
-  border-top: 4px solid transparent;
+#horizontal-menu li {
+  float:left;
+  margin:0 4px;
+  padding-top:6px;
 }
 
-.navbar a:nth-child(1){ border-top:4px solid #f3c623;}
-.navbar a:nth-child(2){ border-top:4px solid #7b2cbf;}
-.navbar a:nth-child(3){ border-top:4px solid #80ed99;}
-.navbar a:nth-child(4){ border-top:4px solid #4cc9f0;}
-.navbar a:nth-child(5){ border-top:4px solid #e63946;}
-.navbar a:nth-child(6){ border-top:4px solid #ffb703;}
+#horizontal-menu li a {
+  display:block;
+  color:#fff;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:12px;
+  padding:2px 14px 8px 14px;
+}
 
-.navbar a:hover {
-  background: #2f5fa0;
+/* COLOR BARS */
+
+#horizontal-menu li.menu-item-level1.col1 {
+  background:url("/Images/deepred-bar.gif") repeat-x;
+}
+#horizontal-menu li.menu-item-level1.col2 {
+  background:url("/Images/golden-bar.gif") repeat-x;
+}
+#horizontal-menu li.menu-item-level1.col3 {
+  background:url("/Images/violet-bar.gif") repeat-x;
+}
+#horizontal-menu li.menu-item-level1.col4 {
+  background:url("/Images/greenlime-bar.gif") repeat-x;
+}
+#horizontal-menu li.menu-item-level1.col5 {
+  background:url("/Images/bluecyan-bar.gif") repeat-x;
+}
+#horizontal-menu li.menu-item-level1.col6 {
+  background:url("/Images/deepred-bar.gif") repeat-x;
+}
+
+.langRO-passive {
+    background-image: url(../Images/MLD-passive.png);
+    width: 26px;
+    height: 15px;
+    display: inline-block;
+}
+.langEN {
+    background-image: url(../Images/ENG.png);
+    width: 26px;
+    height: 15px;
+    display: inline-block;
 }
 
 /* =====================================
-   BODY WRAPPER
+   BODY
 ===================================== */
 
 #body-wrapper {
-  height: 100%;
-  overflow: hidden;
-  padding: 0 10px;
-  margin: 0 0 18px;
-  display: flex;
+  overflow:hidden;
+  padding:0 10px;
+  margin-bottom:18px;
+}
+
+#sidebar {
+  width:200px;
+  float:left;
+}
+
+#content {
+  overflow:hidden;
+  padding-left:20px;
 }
 
 /* =====================================
    SIDEBAR
 ===================================== */
 
-#sidebar {
-  width: 220px;
-}
-
 .sidebar-item {
-  border: 1px solid #999;
-  background: #f3f3f3;
-  padding: 12px;
-  font-size: 12px;
+  border:1px solid;
+  border-left:15px solid #295ea9;
+  padding:5px 5px 5px 10px;
+  margin-top:20px;
 }
 
-.sidebar-title {
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.sidebar-link {
-  display: block;
-  margin-top: 8px;
-  background: #3c6db3;
-  color: #fff;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-/* =====================================
-   CONTENT
-===================================== */
-
-#content {
-  flex: 1;
-  margin-left: 25px;
+.sidebar-item a {
+  margin-top:5px;
+  width:98%;
+  background:#3c79c1;
+  color:#fff;
+  display:block;
+  text-align:center;
+  padding:3px;
+  border-radius:5px;
+  text-decoration:none;
 }
 
 /* =====================================
    PANEL
 ===================================== */
 
-fieldset.app-panel {
-  border: 1px solid #888;
-  background: #b9cfcf;
-  padding: 0;
+.app-panel {
+  padding:10px 0;
 }
 
 .app-left-panel {
-  padding: 10px 12px;
-  font-weight: bold;
-  border-bottom: 1px solid #999;
-  font-size: 14px;
+  width:550px;
+  display:inline-block;
+  border-top:1px solid #ccc;
+  font-weight:bold;
 }
 
 .app-content-panel {
-  padding: 15px;
+  display:inline-block;
+  background:#d6eded;
+  border:1px solid #b1b1b1;
+  border-top:2px solid #ccc;
 }
 
-/* =====================================
-   FORM
-===================================== */
+.content-left {
+  width:300px;
+  float:left;
+  border-right:1px dotted #ccc;
+}
+
+.content-right {
+  width:250px;
+  float:left;
+}
 
 .app-content-data {
-  margin-bottom: 12px;
+  padding:5px;
+  clear:both;
 }
 
 .app-content-data label {
-  display: block;
-  margin-bottom: 4px;
+  display:block;
+  padding-bottom:5px;
 }
 
-.app-content-data input {
-  width: 260px;
-  padding: 4px;
-  border: 1px solid #999;
-  background: #eee;
-  font-size: 12px;
+.app-panel input[type="text"] {
+  width:100%;
+  border:1px solid #777;
 }
 
-.blue-btn {
-  background: #3c6db3;
-  color: #fff;
-  padding: 5px 20px;
-  border: 1px solid #222;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 12px;
+input:focus {
+  background:#fffecc;
 }
-
-.blue-btn:hover {
-  background: #2f5fa0;
-}
-
-/* =====================================
-   CAPTCHA
-===================================== */
-
-.captcha-image {
-  font-size: 22px;
-  font-weight: bold;
-  letter-spacing: 4px;
-  background: #d6e5e5;
-  padding: 8px;
-  width: 180px;
-  border: 1px solid #888;
-  color: #2f5fa0;
-}
-
-/* =====================================
-   RESULT
-===================================== */
-.result-wrapper {
-  display: block;   /* flex remove */
-}
-
-.result-top-section {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.result-bottom {
-  margin-left: 0;   /* force full width */
-}
-
-.status {
-  color: red;
-  font-weight: bold;
-}
-.result-photo {
-  width: 100px;
-  height: 120px;   /* original passport style look */
-  border: 1px solid #999;
-  padding: 3px;
-  background: #fff;
-  object-fit: cover;
-}
-
-
 
 /* =====================================
    FOOTER
 ===================================== */
 
-.footer {
-  border-top: 1px solid #999;
-  padding: 12px 0;
+#footer-wrapper {
+  overflow:hidden;
+  background:url("/Images/footer-divider.gif") repeat-x;
+  padding:10px 0;
 }
 
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: #9a9a9a;
+#contact-info {
+  float:right;
+  width:480px;
 }
 
-.footer-container a {
-  color: blue;
-  text-decoration: underline;
+#contact-info strong {
+  display:block;
+  font-size:11px;
+  color:#6e788c;
 }
