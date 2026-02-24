@@ -173,6 +173,7 @@ export default function CheckVisa() {
         </div>
 
         <div id="content">
+          <div className="page-title-content"></div>
           <div id="masterMainContent">
 
             {!result && (
@@ -318,8 +319,17 @@ export default function CheckVisa() {
         </div>
       </div>
 
-      <div id="footer-wrapper">
-        <span style={{ color: "LightGray" }}>Version: 1.6.1.0</span>
+      <div id="footer-wrapper"> 
+        <span style={{ color: "LightGray" }}>Version: 1.6.1.0</span> 
+        <table id="contact-info"> 
+          <tbody> 
+            <tr> 
+              <td style={{ width: "210px" }}>&nbsp;</td> 
+              <td><strong>E-mail:</strong></td> 
+              <td> <a href="mailto:evisa@mfa.gov.md"> evisa@mfa.gov.md </a> </td> 
+            </tr> 
+          </tbody> 
+        </table> 
       </div>
     </>
   );

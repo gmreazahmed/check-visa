@@ -225,9 +225,13 @@ button {
 /* =====================================
    PANEL
 ===================================== */
-
+input {
+    background-color: #fff;
+    border: 1px solid #f79743;
+}
 .app-panel {
-  padding:10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .app-left-panel {
@@ -239,10 +243,12 @@ button {
 }
 
 .app-content-panel {
-  display:inline-block;
-  background-color:#d6eded;
-  border:1px solid #b1b1b1;
-  border-top:2px solid #ccc;
+    display: inline-block;
+    background-color: #d6eded;
+    border-top: 2px solid #ccc;
+    border-bottom: 1px solid #b1b1b1;
+    border-left: 1px solid #b1b1b1;
+    border-right: 1px solid #b1b1b1;
 }
 
 .content-left {
@@ -255,6 +261,7 @@ button {
   width:250px;
   float:left;
 }
+
 
 .app-content-data {
   display:block;
@@ -274,6 +281,15 @@ button {
 
 input[type="text"]:focus {
   background-color:#fffecc;
+}
+
+.page-title-content {
+    font-size: x-large;
+    border-bottom: 1px dashed #295ea9;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 100%;
 }
 
 /* =====================================
@@ -311,3 +327,4 @@ input[type="text"]:focus {
   line-height:18px;
   color:#6e788c;
 }
+
